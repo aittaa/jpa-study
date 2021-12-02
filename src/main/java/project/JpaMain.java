@@ -19,28 +19,21 @@ public class JpaMain {
 
         one();
 
-//
         two();
-//
-//
+
         three();
-//
-//
+
         four();
-//
-//
+
         five();
-//
-//
+
         six();
-//
-//
+
         seven();
-//
-//
-//        eight();
-//
-//        ten();
+
+        eight();
+
+        ten();
 
         close();
     }
@@ -248,14 +241,6 @@ public class JpaMain {
 
     static private void four() {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfourㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-
-//        movieService.createMovie("철수와 함께 사라지다.", LocalDate.of(2019, 1, 12)
-//                , GenreType.ACTION, 120L);
-//        movieService.createMovie("영수와 함께 사라지다.", LocalDate.of(2019, 1, 12)
-//                , GenreType.ACTION, 120L);
-//        movieService.createMovie("영회와 함께 사라지다.", LocalDate.of(2019, 1, 12)
-//                , GenreType.ACTION, 120L);
-
 
         String director = "김승형";
         String actor = "박진우";

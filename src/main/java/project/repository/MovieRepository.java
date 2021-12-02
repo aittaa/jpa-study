@@ -84,25 +84,21 @@ public class MovieRepository {
 
 
         BooleanBuilder builder = new BooleanBuilder();
-        BooleanBuilder builder2 = new BooleanBuilder();
 
         if (director != null)
             builder.and(qWorker.name.eq(director).and(qMovieWorker.roleType.eq(RoleType.DIRECTOR)));
 
         if (actor != null)
-            builder2.and(qWorker.name.eq(actor).and(qMovieWorker.roleType.eq(RoleType.LEAD).or(qMovieWorker.roleType.eq(RoleType.SUPPORTING))));
+            builder.and(qWorker.name.eq(actor).and(qMovieWorker.roleType.eq(RoleType.LEAD).or(qMovieWorker.roleType.eq(RoleType.SUPPORTING))));
 
         if (openingDate != null)
             builder.and(qMovie.openingDate.eq(openingDate));
 
 
-        List<Movie> movies = queryFactory.selectFrom(qMovie)
+        return queryFactory.selectFrom(qMovie)
                 .leftJoin(qMovie.movieWorkers, qMovieWorker)
                 .leftJoin(qMovieWorker.worker, qWorker)
-                .where(builder).distinct().where(builder2).fetch();
-
-
-        return movies;
+                .where(builder).distinct().fetch();
     }
 
 
