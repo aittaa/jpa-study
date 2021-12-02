@@ -1,28 +1,31 @@
 package project.service;
 
-import project.domain.Address;
-import project.domain.User;
+import project.domain.*;
+import project.repository.ScreeningRepository;
 import project.repository.UserRepository;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ScreeningService {
 
-    UserRepository userRepository = new UserRepository();
+    ScreeningRepository screeningRepository = new ScreeningRepository();
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
-
-        userRepository.save(user);
+    public void createScreening(Theater theater, Movie movie, LocalDateTime screeningStartTime, LocalDateTime screeningEndTime) {
+        Screening screening = new Screening(theater, movie, screeningStartTime, screeningEndTime);
+        screeningRepository.save(screening);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
+    public Screening findOneWithID(Long screeningId){
+        return screeningRepository.findOneWithID(screeningId);
     }
-
-
-    public List<User> findAllUser(){
-        return userRepository.findAll();
-    }
+//
+//
+//    public List<User> findAllUser(){
+//        return userRepository.findAll();
+//    }
 
 
 }

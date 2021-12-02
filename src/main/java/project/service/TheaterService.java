@@ -1,28 +1,29 @@
 package project.service;
 
-import project.domain.Address;
+import project.domain.Theater;
 import project.domain.User;
-import project.repository.UserRepository;
+import project.repository.TheaterRepository;
 
+import javax.persistence.Column;
 import java.util.List;
 
 public class TheaterService {
 
-    UserRepository userRepository = new UserRepository();
+    TheaterRepository theaterRepository = new TheaterRepository();
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
+    public void createTheater(String name, Long floor) {
+        Theater theater = new Theater(name, floor);
 
-        userRepository.save(user);
+        theaterRepository.save(theater);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
+    public Theater findOneWithID(Long userID){
+        return theaterRepository.findOneWithID(userID);
     }
-
-
-    public List<User> findAllUser(){
-        return userRepository.findAll();
-    }
+//
+//
+//    public List<User> findAllUser(){
+//        return userRepository.findAll();
+//    }
 
 
 }

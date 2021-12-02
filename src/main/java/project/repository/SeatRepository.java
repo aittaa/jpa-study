@@ -3,6 +3,7 @@ package project.repository;
 import project.EMFSingleton;
 import project.domain.MovieWorker;
 import project.domain.Seat;
+import project.domain.Theater;
 import project.domain.User;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,34 @@ public class SeatRepository{
             em.close();
         }
 
+    }
+
+    public Seat findOneWithID(Long seatId){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Seat seat = null;
+
+        try {
+            tx.begin();
+            ////
+
+            seat = em.find(Seat.class, seatId);
+
+            ////
+
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            System.out.println("rollback");
+
+        } finally {
+            em.close();
+        }
+
+        return seat;
     }
 }
 

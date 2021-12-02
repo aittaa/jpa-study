@@ -3,13 +3,14 @@ package project.repository;
 import project.EMFSingleton;
 import project.domain.MovieWorker;
 import project.domain.Screening;
+import project.domain.Theater;
 import project.domain.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class ScreeningRepository{
+public class ScreeningRepository {
     EntityManagerFactory emf = EMFSingleton.getInstance();
 
     public void save(Screening Screening) {
@@ -32,6 +33,34 @@ public class ScreeningRepository{
             em.close();
         }
 
+    }
+
+    public Screening findOneWithID(Long screeningId) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Screening screening = null;
+
+        try {
+            tx.begin();
+            ////
+
+            screening = em.find(Screening.class, screeningId);
+
+            ////
+
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            System.out.println("rollback");
+
+        } finally {
+            em.close();
+        }
+
+        return screening;
     }
 }
 

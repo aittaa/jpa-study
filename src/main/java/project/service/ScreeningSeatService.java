@@ -1,28 +1,37 @@
 package project.service;
 
-import project.domain.Address;
-import project.domain.User;
+import project.domain.*;
+import project.repository.ScreeningSeatRepository;
 import project.repository.UserRepository;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 public class ScreeningSeatService {
 
-    UserRepository userRepository = new UserRepository();
+    ScreeningSeatRepository screeningSeatRepository = new ScreeningSeatRepository();
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
+    public void createScreeningSeat(Seat seat, Screening screening, SeatStatusType seatStatus) {
+        ScreeningSeat screeningSeat = new ScreeningSeat(seat, screening, seatStatus);
 
-        userRepository.save(user);
+        screeningSeatRepository.save(screeningSeat);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
+    public ScreeningSeat findOneWithID(Long screeningSeatId){
+        return screeningSeatRepository.findOneWithID(screeningSeatId);
     }
 
-
-    public List<User> findAllUser(){
-        return userRepository.findAll();
+//    public void update(Long screeningSeatId, SeatStatusType seatStatusType){
+//        screeningSeatRepository.update(screeningSeatId, seatStatusType);
+//    }
+    public void updateWithSeatIdAndScreeningId(Seat seat, Screening screening, SeatStatusType seatStatusType){
+        screeningSeatRepository.updateWithSeatIdAndScreeningId(seat, screening, seatStatusType);
     }
+//
+//
+//    public List<User> findAllUser(){
+//        return userRepository.findAll();
+//    }
 
 
 }

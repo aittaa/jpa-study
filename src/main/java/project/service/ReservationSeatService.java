@@ -1,28 +1,30 @@
 package project.service;
 
-import project.domain.Address;
-import project.domain.User;
+import project.domain.*;
+import project.repository.ReservationSeatRepository;
 import project.repository.UserRepository;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 public class ReservationSeatService {
 
-    UserRepository userRepository = new UserRepository();
+    ReservationSeatRepository reservationSeatRepository = new ReservationSeatRepository();
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
+    public void createReservationSeat(Reservation reservation, Seat seat) {
+        ReservationSeat reservationSeat = new ReservationSeat(reservation, seat);
 
-        userRepository.save(user);
+        reservationSeatRepository.save(reservationSeat);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
-    }
+//    public User findOneWithID(Long userID){
+//        return reservationSeatRepository.findOneWithID(userID);
+//    }
 
 
-    public List<User> findAllUser(){
-        return userRepository.findAll();
-    }
+//    public List<User> findAllUser(){
+//        return reservationSeatRepository.findAll();
+//    }
 
 
 }

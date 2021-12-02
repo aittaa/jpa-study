@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "WORKER")
 
 @Inheritance(strategy = InheritanceType.JOINED) //부모 클래스에 사용, 전략 지정
@@ -33,9 +34,6 @@ public abstract class Worker {
 
    @Column(name = "DAY", nullable = true)
    private Long day;
-
-   @Column(name = "DTYPE", nullable = false)
-   private Long dtype;
 
    @OneToMany(mappedBy = "worker")
    private final List<MovieWorker> movieWorkers = new ArrayList<MovieWorker>();

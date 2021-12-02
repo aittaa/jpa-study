@@ -24,5 +24,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
+    public void updateName(Long userId, String name){
+        userRepository.updateName(userId, name);
+    }
 }

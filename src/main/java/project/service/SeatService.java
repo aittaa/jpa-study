@@ -1,28 +1,31 @@
 package project.service;
 
-import project.domain.Address;
-import project.domain.User;
+import project.domain.*;
+import project.repository.SeatRepository;
 import project.repository.UserRepository;
 
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Lob;
 import java.util.List;
 
 public class SeatService {
+    SeatRepository seatRepository = new SeatRepository();
 
-    UserRepository userRepository = new UserRepository();
+    public void createSeat(Theater theater, Long seatRow, Long seatCol, SeatType seatType, String note) {
+        Seat seat = new Seat(theater, seatRow, seatCol, seatType, note);
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
-
-        userRepository.save(user);
+        seatRepository.save(seat);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
+    public Seat findOneWithID(Long userID){
+        return seatRepository.findOneWithID(userID);
     }
 
 
-    public List<User> findAllUser(){
-        return userRepository.findAll();
-    }
+//    public List<User> findAllUser(){
+//        return userRepository.findAll();
+//    }
 
 
 }

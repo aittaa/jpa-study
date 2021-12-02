@@ -8,7 +8,7 @@ public class ActorService {
 
     ActorRepository actorRepository = new ActorRepository();
 
-    public void createWorker(String name, Long year, Long month, Long day, Long height, String instagram) {
+    public void createActor(String name, Long year, Long month, Long day, Long height, String instagram) {
         Actor actor = new Actor();
 
         actor.setName(name);

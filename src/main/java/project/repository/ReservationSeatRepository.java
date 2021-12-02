@@ -1,13 +1,13 @@
 package project.repository;
 
 import project.EMFSingleton;
-import project.domain.MovieWorker;
-import project.domain.ReservationSeat;
-import project.domain.User;
+import project.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+
+import java.util.List;
 
 public class ReservationSeatRepository{
     EntityManagerFactory emf = EMFSingleton.getInstance();
@@ -33,6 +33,8 @@ public class ReservationSeatRepository{
         }
 
     }
+
+
 }
 
 

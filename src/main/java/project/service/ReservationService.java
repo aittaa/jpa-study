@@ -1,27 +1,35 @@
 package project.service;
 
-import project.domain.Address;
-import project.domain.User;
+import project.domain.*;
+import project.repository.ReservationRepository;
 import project.repository.UserRepository;
 
+import javax.persistence.*;
 import java.util.List;
 
 public class ReservationService {
 
-    UserRepository userRepository = new UserRepository();
+    ReservationRepository reservationRepository = new ReservationRepository();
 
-    public void createUser(String name, Long age, String city, String street, String zipCode) {
-        User user = new User(name, age, new Address(city, street, zipCode));
+    public void createReservation(User user, Screening screening, ReservationStatusType reservationStatus) {
+        Reservation reservation = new Reservation(user, screening, reservationStatus);
 
-        userRepository.save(user);
+        reservationRepository.save(reservation);
     }
-    public User findOneWithID(Long userID){
-        return userRepository.findOneWithID(userID);
+    public Reservation findOneWithID(Long reservationId){
+        return reservationRepository.findOneWithID(reservationId);
     }
 
+    public List<Reservation> findAllReservation(){
+        return reservationRepository.findAll();
+    }
 
-    public List<User> findAllUser(){
-        return userRepository.findAll();
+    public List<Reservation> findById(Long userId){
+        return reservationRepository.findById(userId);
+    }
+
+    public void removeReservation(Long userId){
+        reservationRepository.removeReservation(userId);
     }
 
 

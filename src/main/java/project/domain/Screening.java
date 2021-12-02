@@ -47,6 +47,30 @@ public class Screening {
    @OneToMany(mappedBy = "screening")
    private final List<Reservation> reservations = new ArrayList<Reservation>();
 
+   @Override
+   public String toString() {
 
+      StringBuilder baseInf = new StringBuilder("Screen{" +
+              "영화이름 : " + movie.getName() +
+              ", 시작시간 : " + screeningStartTime + '\'' +
+              ", 종료시간 : " + screeningEndTime +
+              ", 총좌석 : " + screenSeats.size() + "}\n");
+
+
+      baseInf.append("movieWorkers = [");
+
+      for(ScreeningSeat screeningSeat : screenSeats){
+         baseInf.append("{");
+         baseInf.append("row : " + screeningSeat.getSeat().getSeatRow());
+         baseInf.append("col : " + screeningSeat.getSeat().getSeatCol());
+         baseInf.append("상태 : " + screeningSeat.getSeatStatus());
+         baseInf.append("}\n");
+      }
+
+      baseInf.append("]");
+
+
+      return baseInf.toString();
+   }
 
 }

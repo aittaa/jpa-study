@@ -63,7 +63,7 @@ public class UserRepository {
         return users;
     }
 
-    public User findOneWithID(Long userID ){
+    public User findOneWithID(Long userID) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 

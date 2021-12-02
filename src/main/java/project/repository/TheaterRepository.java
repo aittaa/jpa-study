@@ -1,6 +1,7 @@
 package project.repository;
 
 import project.EMFSingleton;
+import project.domain.Theater;
 import project.domain.MovieWorker;
 import project.domain.Theater;
 import project.domain.User;
@@ -32,6 +33,34 @@ public class TheaterRepository{
             em.close();
         }
 
+    }
+
+    public Theater findOneWithID(Long theaterId){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        Theater theater = null;
+
+        try {
+            tx.begin();
+            ////
+
+            theater = em.find(Theater.class, theaterId);
+
+            ////
+
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            System.out.println("rollback");
+
+        } finally {
+            em.close();
+        }
+
+        return theater;
     }
 }
 

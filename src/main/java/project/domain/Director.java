@@ -11,6 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Getter
+@Setter
 @Table(name = "DIRECTOR")
 
 @DiscriminatorValue("D")

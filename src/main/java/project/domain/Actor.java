@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 
 @Table(name = "ACTOR")
 @DiscriminatorValue("A")

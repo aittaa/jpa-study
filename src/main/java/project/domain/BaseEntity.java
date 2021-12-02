@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@Getter
 
 @MappedSuperclass
 
