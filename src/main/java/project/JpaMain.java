@@ -1,6 +1,7 @@
 package project;
 
 import project.domain.*;
+import project.repository.UserRepository;
 import project.service.*;
 import project.domain.RoleType;
 
@@ -21,14 +22,14 @@ public class JpaMain {
 
 
         three();
-//
-//
-//        four();
-//
-//
-//        five();
-//
-//
+
+
+        four();
+
+
+        five();
+
+////
 //        six();
 //
 //
@@ -66,47 +67,26 @@ public class JpaMain {
     }
 
     static private void two() throws InterruptedException {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡtwoㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+
 //
 //        Thread.sleep(2000);
 
         User user = userService.findOneWithID(1L);
 
-        user.setName("마우스");
-        user.setModificationDate(LocalDateTime.now());
+        userService.updateName(1L, "마우스");
 
-        System.out.println(user);
-        System.out.println("CreationDate : " + user.getCreationDate()
-                + "\nModification Date : " + user.getModificationDate());
+        User user2 = userService.findOneWithID(1L);
+
+        System.out.println(user2.getName());
+        System.out.println("CreationDate : " + user2.getCreationDate()
+                + "\nModification Date : " + user2.getModificationDate());
 
     }
 
 
     static private void three() {
-
-        //insert dummy data
-        movieService.createMovie("바람과 함께 사라지다", LocalDateTime.of(2019, 11, 12, 12, 32, 22, 3333)
-                , GenreType.ACTION, 120L);
-
-        directorService.createDirector("김승형", 1998L, 1L, 21L, "goomi");
-        actorService.createWorker("박진우", 1998L, 4L, 7L, 179L, "www.instagram.com");
-        actorService.createWorker("김철수", 1998L, 4L, 7L, 179L, "www.instagram.com/oto");
-
-
-        Movie movie = movieService.findOneWithID(3L);
-
-        Director directorObj = directorService.findOneWithID(4L);
-        Actor actorObj1 = actorService.findOneWithID(5L);
-        Actor actorObj2 = actorService.findOneWithID(6L);
-
-        System.out.println(movie);
-        System.out.println(directorObj);
-        System.out.println(actorObj1);
-        System.out.println(actorObj2);
-
-        movieWorkerService.createMovieWorker(movie, directorObj, RoleType.DIRECTOR);
-        movieWorkerService.createMovieWorker(movie, actorObj1, RoleType.LEAD);
-        movieWorkerService.createMovieWorker(movie, actorObj2, RoleType.SUPPORTING);
-
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡthreeㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
         Movie newMovie = movieService.findOneWithID(3L);
         System.out.println(newMovie);
@@ -115,11 +95,26 @@ public class JpaMain {
 
 
     static private void four() {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfourㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
+//        movieService.createMovie("철수와 함께 사라지다.", LocalDate.of(2019, 1, 12)
+//                , GenreType.ACTION, 120L);
+//        movieService.createMovie("영수와 함께 사라지다.", LocalDate.of(2019, 1, 12)
+//                , GenreType.ACTION, 120L);
+//        movieService.createMovie("영회와 함께 사라지다.", LocalDate.of(2019, 1, 12)
+//                , GenreType.ACTION, 120L);
+//
+
+        String director = null;
+        String actor = null;
+        LocalDate openingDate = LocalDate.of(2019, 11, 12);
+        ;
+        movieService.movieSearch(director, actor, openingDate);
 
     }
 
     static private void five() {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfiveㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
     }
 
@@ -132,14 +127,42 @@ public class JpaMain {
     }
 
     static private void eight() {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡeightㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+
+        User user = userService.findOneWithID(1L);
+
+        // Reservation User
+        Reservation reservation = user.getReservations().get(0);
+
+        // 해당 유저의 예매 삭제
+        reservationService.removeReservation(user.getUserId());
+
+        // 예매 내역 조회를 통해 내역이 삭제 되었음을 확인
+        List<Reservation> reservationList = reservationService.findAllReservation();
+        for (Reservation res : reservationList) {
+            System.out.println(res);
+        }
+
+        // 상영 좌석 수정
+        for (ReservationSeat reservationSeat : reservation.getReservationSeats()) {
+            screeningSeatService.updateWithSeatIdAndScreeningId(reservationSeat.getSeat(), reservation.getScreening(), SeatStatusType.AVAILABLE);
+        }
+
+        // 예매 좌석 삭제
+
+
+        // 예매 후, 상영정보 재조회를 통해 좌석이 반환되었음을 확인
+
 
     }
 
     static private void nine() {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡnineㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
     }
 
     static private void ten() {
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡtenㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
     }
 

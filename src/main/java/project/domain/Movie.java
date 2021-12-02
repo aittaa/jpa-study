@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Movie extends BaseEntity{
       super(LocalDateTime.now(),LocalDateTime.now());
    }
 
-   public Movie(String name, LocalDateTime openingDate, GenreType genre, Long runningTime) {
+   public Movie(String name, LocalDate openingDate, GenreType genre, Long runningTime) {
       super(LocalDateTime.now(), LocalDateTime.now());
       this.name = name;
       this.openingDate = openingDate;
@@ -35,7 +36,7 @@ public class Movie extends BaseEntity{
    private String name;
 
    @Column(name = "OPENING_DATE", nullable = false)
-   private LocalDateTime openingDate;
+   private LocalDate openingDate;
 
    @Enumerated(EnumType.STRING)
    @Column(name = "GENRE", nullable = false)

@@ -91,4 +91,28 @@ public class UserRepository {
         return user;
     }
 
+    public void updateName(Long userId, String name) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            ////
+
+            User user = em.find(User.class, userId);
+            user.setName(name);
+
+            ////
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            System.out.println("rollback");
+
+        } finally {
+            em.close();
+        }
+
+    }
 }
