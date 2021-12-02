@@ -57,18 +57,15 @@ public class Screening {
               ", 총좌석 : " + screenSeats.size() + "}\n");
 
 
-      baseInf.append("movieWorkers = [");
+      baseInf.append("Screening Seat\n");
 
       for(ScreeningSeat screeningSeat : screenSeats){
          baseInf.append("{");
-         baseInf.append("row : " + screeningSeat.getSeat().getSeatRow());
-         baseInf.append("col : " + screeningSeat.getSeat().getSeatCol());
-         baseInf.append("상태 : " + screeningSeat.getSeatStatus());
+         baseInf.append(", row : " + screeningSeat.getSeat().getSeatRow());
+         baseInf.append(", col : " + screeningSeat.getSeat().getSeatCol());
+         baseInf.append(", 상태 : " + screeningSeat.getSeatStatus());
          baseInf.append("}\n");
       }
-
-      baseInf.append("]");
-
 
       return baseInf.toString();
    }

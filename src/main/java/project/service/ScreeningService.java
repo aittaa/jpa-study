@@ -4,9 +4,8 @@ import project.domain.*;
 import project.repository.ScreeningRepository;
 import project.repository.UserRepository;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class ScreeningService {
         Screening screening = new Screening(theater, movie, screeningStartTime, screeningEndTime);
         screeningRepository.save(screening);
     }
+
     public Screening findOneWithID(Long screeningId){
         return screeningRepository.findOneWithID(screeningId);
     }

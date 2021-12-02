@@ -1,11 +1,11 @@
 package project;
 
 import project.domain.*;
-import project.repository.UserRepository;
 import project.service.*;
 import project.domain.RoleType;
 
 
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -84,7 +84,7 @@ public class JpaMain {
         movieService.createMovie("지옥", LocalDate.of(2019, 11, 12)
                 , GenreType.ACTION, 120L);
 
-        actorService.createActor("유아인", 1998L, 4L, 7L, 179L, "www.instagram.com");
+        directorService.createDirector("유아인", 1998L, 4L, 7L, "goomi");
         actorService.createActor("김현주", 1998L, 4L, 7L, 179L, "www.instagram.com/oto");
         actorService.createActor("박정민", 1998L, 4L, 7L, 179L, "www.instagram.com/oto");
 
@@ -110,7 +110,7 @@ public class JpaMain {
 
         Movie movie4_1 = movieService.findOneWithID(10L);
 
-        Actor actorObj4_1 = actorService.findOneWithID(11L);
+        Director actorObj4_1 = directorService.findOneWithID(11L);
         Actor actorObj4_2 = actorService.findOneWithID(12L);
         Actor actorObj4_3 = actorService.findOneWithID(13L);
 
@@ -132,7 +132,7 @@ public class JpaMain {
         Actor actorObj4_11 = actorService.findOneWithID(24L);
         Actor actorObj4_12 = actorService.findOneWithID(25L);
 
-        movieWorkerService.createMovieWorker(movie4_1, actorObj4_1, RoleType.LEAD);
+        movieWorkerService.createMovieWorker(movie4_1, actorObj4_1, RoleType.DIRECTOR);
         movieWorkerService.createMovieWorker(movie4_1, actorObj4_2, RoleType.LEAD);
         movieWorkerService.createMovieWorker(movie4_1, actorObj4_3, RoleType.SUPPORTING);
 
@@ -283,92 +283,16 @@ public class JpaMain {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡsixㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
         Screening screening = screeningService.findOneWithID(52L);
-
-        System.out.println(screening);
-
     }
 
     static private void seven() {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡsevenㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-
-        User user = userService.findOneWithID(1L);
-
-        // 예매내역 조회를 통해 예매가 없음을 보임
-        List<Reservation> reservations = reservationService.findById(user.getUserId());
-        if (reservations.isEmpty()) {
-            System.out.println("예매가 없습니다.");
-        } else {
-            for (Reservation reservation : reservations) {
-                System.out.println(reservation);
-            }
-        }
-        // 상영 영화 좌석 상태 조회
-        Screening screening = screeningService.findOneWithID(52L);
-        System.out.println(screening);
-
-        // 2 자리 예매
-        // Reservation
-        reservationService.createReservation(user, screening, ReservationStatusType.RESERVATION);
-
-        // id 수정 필요
-        Reservation newReservation = reservationService.findOneWithID(1L);
-
-        // Selected Seat id 수정 필요
-        Seat seat1 = seatService.findOneWithID(1L);
-        Seat seat2 = seatService.findOneWithID(12L);
-
-        // Create Reservation Seat
-        reservationSeatService.createReservationSeat(newReservation, seat1);
-        reservationSeatService.createReservationSeat(newReservation, seat2);
-
-        // Update Screening Seat id 수정 필요
-        screeningSeatService.updateWithSeatIdAndScreeningId(seat1, screening, SeatStatusType.RESERVED);
-        screeningSeatService.updateWithSeatIdAndScreeningId(seat2, screening, SeatStatusType.RESERVED);
-
-        // 예매 내역 조회를 통해 새로운 예매내역 확인
-        reservations = reservationService.findById(user.getUserId());
-        if (reservations.isEmpty()) {
-            System.out.println("예매가 없습니다.");
-        } else {
-            for (Reservation reservation : reservations) {
-                System.out.println(reservation);
-            }
-        }
-
-        // 예매 후, 상영정보 재조회를 통해 좌석이 반환되었음을 확인
-        screening = screeningService.findOneWithID(52L);
-        System.out.println(screening);
-
+        reservationService.reservate();
     }
 
     static private void eight() {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡeightㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-
-        User user = userService.findOneWithID(1L);
-
-        // Reservation User
-        Reservation reservation = user.getReservations().get(0);
-
-        // 해당 유저의 예매 삭제
-        reservationService.removeReservation(user.getUserId());
-
-        // 예매 내역 조회를 통해 내역이 삭제 되었음을 확인
-        List<Reservation> reservationList = reservationService.findAllReservation();
-        for (Reservation res : reservationList) {
-            System.out.println(res);
-        }
-
-        // 상영 좌석 수정
-        for (ReservationSeat reservationSeat : reservation.getReservationSeats()) {
-            screeningSeatService.updateWithSeatIdAndScreeningId(reservationSeat.getSeat(), reservation.getScreening(), SeatStatusType.AVAILABLE);
-        }
-
-        // 예매 좌석 삭제
-
-
-        // 예매 후, 상영정보 재조회를 통해 좌석이 반환되었음을 확인
-
-
+        reservationService.cancleReservation();
     }
 
     static private void ten() {

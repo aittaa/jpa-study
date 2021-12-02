@@ -51,17 +51,14 @@ public class Reservation {
               ", 종료시간 : " + screening.getScreeningEndTime() + "}\n");
 
       // 예매 좌석 정보
-      baseInf.append("Reservation Seat = [");
+      baseInf.append("Reservation Seat\n");
 
       for(ReservationSeat reservationSeat : reservationSeats){
          baseInf.append("{");
          baseInf.append("row : " + reservationSeat.getSeat().getSeatRow());
-         baseInf.append("col : " + reservationSeat.getSeat().getSeatCol());
+         baseInf.append(", col : " + reservationSeat.getSeat().getSeatCol());
          baseInf.append("}\n");
       }
-
-      baseInf.append("]");
-
 
       return baseInf.toString();
    }

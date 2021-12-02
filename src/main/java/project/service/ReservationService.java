@@ -2,9 +2,7 @@ package project.service;
 
 import project.domain.*;
 import project.repository.ReservationRepository;
-import project.repository.UserRepository;
 
-import javax.persistence.*;
 import java.util.List;
 
 public class ReservationService {
@@ -32,5 +30,12 @@ public class ReservationService {
         reservationRepository.removeReservation(userId);
     }
 
+    public void reservate(){
+        reservationRepository.reservate();
+    }
+
+    public void cancleReservation(){
+        reservationRepository.cancleReservation();
+    }
 
 }

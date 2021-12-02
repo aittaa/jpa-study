@@ -46,6 +46,7 @@ public class ScreeningRepository {
             ////
 
             screening = em.find(Screening.class, screeningId);
+            System.out.println(screening);
 
             ////
 
