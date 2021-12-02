@@ -38,7 +38,7 @@ public class Reservation {
    @Column(name = "RESERVATION_STATUS", nullable = false)
    private ReservationStatusType reservationStatus;
 
-   @OneToMany(mappedBy = "reservation")
+   @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE, orphanRemoval = true)
    private final List<ReservationSeat> reservationSeats = new ArrayList<ReservationSeat>();
 
    @Override

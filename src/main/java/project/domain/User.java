@@ -44,7 +44,7 @@ public class User extends BaseEntity {
    @Embedded
    private Address address;
 
-   @OneToMany(mappedBy = "user")
+   @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
    private final List<Reservation> reservations = new ArrayList<Reservation>();
 
 

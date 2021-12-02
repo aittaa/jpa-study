@@ -115,4 +115,30 @@ public class UserRepository {
         }
 
     }
+
+    public void deleteUser(Long userID){
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            ////
+
+            User user = em.find(User.class, userID);
+            em.remove(user);
+
+            ////
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+            e.printStackTrace();
+            System.out.println("rollback");
+
+        } finally {
+            em.close();
+        }
+
+
+    }
 }

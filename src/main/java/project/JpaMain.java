@@ -19,34 +19,28 @@ public class JpaMain {
 
         one();
 
-
-        two();
-
-
-        three();
-
-
-        four();
-
-
-        five();
-
-
-        six();
-
 //
-//        seven();
+        two();
+//
+//
+        three();
+//
+//
+        four();
+//
+//
+        five();
+//
+//
+        six();
+//
+//
+        seven();
 //
 //
 //        eight();
 //
-//
-//        nine();
-//
-//
 //        ten();
-//
-
 
         close();
     }
@@ -214,6 +208,8 @@ public class JpaMain {
 
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡoneㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
+        userService.createUser("박a진우", 94L, "구미시", "대학로 61", "푸름1동 443호");
+
         List<User> users = userService.findAllUser();
 
         for (User user : users) {
@@ -234,7 +230,7 @@ public class JpaMain {
 
         User user2 = userService.findOneWithID(1L);
 
-        System.out.println(user2.getName());
+        System.out.println(user2);
         System.out.println("CreationDate : " + user2.getCreationDate()
                 + "\nModification Date : " + user2.getModificationDate());
 
@@ -259,13 +255,14 @@ public class JpaMain {
 //                , GenreType.ACTION, 120L);
 //        movieService.createMovie("영회와 함께 사라지다.", LocalDate.of(2019, 1, 12)
 //                , GenreType.ACTION, 120L);
-//
 
-        String director = null;
-        String actor = null;
+
+        String director = "김승형";
+        String actor = "박진우";
+//        LocalDate openingDate = null;
         LocalDate openingDate = LocalDate.of(2019, 11, 12);
-        ;
-        movieService.movieSearch(director, actor, openingDate);
+
+        System.out.println(movieService.movieSearch(director, actor, openingDate));
 
     }
 
@@ -374,13 +371,11 @@ public class JpaMain {
 
     }
 
-    static private void nine() {
-        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡnineㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-
-    }
-
     static private void ten() {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡtenㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+        final Long DELETE_USER_ID = 1L;
+        userService.deleteUser(DELETE_USER_ID);
+
 
     }
 

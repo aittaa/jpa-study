@@ -2,6 +2,7 @@ package project.repository;
 
 import project.EMFSingleton;
 import project.domain.*;
+import project.service.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

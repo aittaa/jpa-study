@@ -78,17 +78,19 @@ public class MovieRepository {
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
         QMovieWorker qMovieWorker = new QMovieWorker("mw");
+
         QMovie qMovie = new QMovie("m");
         QWorker qWorker = new QWorker("w");
 
 
         BooleanBuilder builder = new BooleanBuilder();
+        BooleanBuilder builder2 = new BooleanBuilder();
 
         if (director != null)
             builder.and(qWorker.name.eq(director).and(qMovieWorker.roleType.eq(RoleType.DIRECTOR)));
 
         if (actor != null)
-            builder.and(qWorker.name.eq(actor).and(qMovieWorker.roleType.eq(RoleType.LEAD)).or(qMovieWorker.roleType.eq(RoleType.SUPPORTING)));
+            builder2.and(qWorker.name.eq(actor).and(qMovieWorker.roleType.eq(RoleType.LEAD).or(qMovieWorker.roleType.eq(RoleType.SUPPORTING))));
 
         if (openingDate != null)
             builder.and(qMovie.openingDate.eq(openingDate));
@@ -97,7 +99,7 @@ public class MovieRepository {
         List<Movie> movies = queryFactory.selectFrom(qMovie)
                 .leftJoin(qMovie.movieWorkers, qMovieWorker)
                 .leftJoin(qMovieWorker.worker, qWorker)
-                .where(builder).distinct().fetch();
+                .where(builder).distinct().where(builder2).fetch();
 
 
         return movies;

@@ -27,4 +27,8 @@ public class UserService {
     public void updateName(Long userId, String name){
         userRepository.updateName(userId, name);
     }
+
+    public void deleteUser(Long userID){
+        userRepository.deleteUser(userID);
+    }
 }
