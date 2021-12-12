@@ -31,7 +31,7 @@ public class JpaMain {
 
         seven();
 
-        eight();
+//        eight();
 
         ten();
 
@@ -243,9 +243,11 @@ public class JpaMain {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfourㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
         String director = "김승형";
+//        String director = null;
         String actor = "박진우";
-//        LocalDate openingDate = null;
-        LocalDate openingDate = LocalDate.of(2019, 11, 12);
+//        String actor = null;
+        LocalDate openingDate = null;
+//        LocalDate openingDate = LocalDate.of(2019, 11, 12);
 
         System.out.println(movieService.movieSearch(director, actor, openingDate));
 
@@ -254,7 +256,7 @@ public class JpaMain {
     static private void five() {
         System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡfiveㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 
-        List<Movie> movies = movieService.findAllByPaging(1);
+        List<Movie> movies = movieService.findAllByPaging(2);
 
         System.out.println("Page");
         for (Movie movie : movies) {

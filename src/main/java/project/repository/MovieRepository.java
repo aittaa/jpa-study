@@ -77,27 +77,32 @@ public class MovieRepository {
 
         JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 
-        QMovieWorker qMovieWorker = new QMovieWorker("mw");
+        QMovieWorker qMovieWorker1 = new QMovieWorker("mw1");
+        QMovieWorker qMovieWorker2 = new QMovieWorker("mw2");
 
         QMovie qMovie = new QMovie("m");
-        QWorker qWorker = new QWorker("w");
+        QWorker qWorker1 = new QWorker("w1");
+        QWorker qWorker2 = new QWorker("w2");
 
 
         BooleanBuilder builder = new BooleanBuilder();
 
         if (director != null)
-            builder.and(qWorker.name.eq(director).and(qMovieWorker.roleType.eq(RoleType.DIRECTOR)));
+            builder.and(qWorker1.name.eq(director).and(qMovieWorker1.roleType.eq(RoleType.DIRECTOR)));
 
         if (actor != null)
-            builder.and(qWorker.name.eq(actor).and(qMovieWorker.roleType.eq(RoleType.LEAD).or(qMovieWorker.roleType.eq(RoleType.SUPPORTING))));
+            builder.and(qWorker2.name.eq(actor).and(qMovieWorker2.roleType.eq(RoleType.LEAD).or(qMovieWorker2.roleType.eq(RoleType.SUPPORTING))));
 
         if (openingDate != null)
             builder.and(qMovie.openingDate.eq(openingDate));
 
 
         return queryFactory.selectFrom(qMovie)
-                .leftJoin(qMovie.movieWorkers, qMovieWorker)
-                .leftJoin(qMovieWorker.worker, qWorker)
+                .join(qMovie.movieWorkers, qMovieWorker1)
+                .join(qMovieWorker1.worker, qWorker1)
+                .join(qMovie.movieWorkers, qMovieWorker2)
+                .join(qMovieWorker2.worker, qWorker2)
+                .on(qWorker1.workerId.ne(qWorker2.workerId))
                 .where(builder).distinct().fetch();
     }
 

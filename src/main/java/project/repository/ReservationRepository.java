@@ -206,8 +206,8 @@ public class ReservationRepository {
 
             // 예매내역 조회를 통해 예매가 없음을 보임
             TypedQuery<Reservation> query3 = em.createQuery("SELECT r FROM Reservation r where r.user=:userId", Reservation.class);
-            query.setParameter("userId", user);
-            List<Reservation> reservations = query3.getResultList();
+            query3.setParameter("userId", user);
+            reservations = query3.getResultList();
 
 //            List<Reservation> reservations = reservationService.findById(user.getUserId());
             if (reservations.isEmpty()) {
